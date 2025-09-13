@@ -11,7 +11,7 @@ function App() {
   const [chat, setChat] = useState([]);
   const [joined, setJoined] = useState(false);
   const [typing, setTyping] = useState("");
-  // const typingTimeout = useRef(null);
+  const chatEndRef = useRef(null);
   const inputRef = useRef();
 
   // Handle socket events (in a single useEffect)
@@ -47,6 +47,12 @@ function App() {
   useEffect(() => {
     if (inputRef.current) inputRef.current.focus();
   }, [chat, joined]);
+
+  //scroll to bottom smooth
+  useEffect(() => {
+  chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+}, [chat]);
+
 
   // Join a room
   const joinRoom = () => {
@@ -141,6 +147,8 @@ function App() {
 
         {/* {typing && <div className="typing">{typing}</div>} */}
         <div className="typing">{typing}</div>
+          {/* 👇 Auto scroll target */}
+          <div ref={chatEndRef} />
       </div>
 
       <div className="input-area">
