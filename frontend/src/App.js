@@ -94,6 +94,13 @@ function App() {
     // }, 1000);
   };
 
+  //Enter key Handler
+  const keyhandler = (e) => {
+    if(e.key === "Enter"){
+      sendMessage();
+    }
+  }
+
   if (!joined) {
     return (
       <div className="login-wrapper">
@@ -157,6 +164,7 @@ function App() {
           value={message}
           onChange={handleTyping}
           placeholder="Type a message"
+          onKeyDown={keyhandler}
         />
         <button onClick={sendMessage}>Send</button>
       </div>
